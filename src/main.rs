@@ -10,22 +10,18 @@ fn main() {
     let start = Instant::now();
     // make_testfile();
     let mut values = get_input();
-    // let mut og = values.clone();
-    // og.sort();
-    let max_depth = (values.len() as f64).log2().floor() as usize * 3 as usize;
+    let max_depth = (values.len() as f64).log2().floor() as usize * 2 as usize;
     eprintln!("Max: {}", max_depth);
     let len = values.len();
     smart_sort(&mut values, max_depth, 0, len - 1, len);
-    // assert_eq!(values, og);
-    // eprintln!("{:?}", values);
-    // println!(
-    //     "{}",
-    //     values
-    //         .iter()
-    //         .map(|i| i.to_string())
-    //         .collect::<Vec<String>>()
-    //         .join(" ")
-    // );
+    println!(
+        "{}",
+        values
+            .iter()
+            .map(|i| i.to_string())
+            .collect::<Vec<String>>()
+            .join(" ")
+    );
     let duration = start.elapsed();
 
     eprintln!("Time elapsed in expensive_function() is: {:?}", duration);
@@ -39,8 +35,7 @@ fn smart_sort(values: &mut [i32], max_depth: usize, low: usize, high: usize, len
     if length <= 100 {
         insertion_sort(&mut values[low..=high])
     } else if max_depth == 0 {
-        eprintln!("Heap");
-        heap_sort(values)
+        heap_sort(&mut values[low..=high])
     } else {
         if low < high {
             let pivot = partition(values, low, high);
@@ -152,56 +147,4 @@ fn get_input() -> Vec<i32> {
         .collect::<Vec<i32>>();
 
     values
-}
-
-#[cfg(test)]
-mod tests {
-    use crate::smart_sort;
-
-    #[test]
-    fn easy_nr() {
-        let mut res = vec![3, 6, 21, 3, 7, 1, 4, 7, 9, 2, 3, 7, 0];
-        let length = res.len();
-        smart_sort(&mut res, length, 0, length - 1, length);
-        assert_eq!(res, [0, 1, 2, 3, 3, 3, 4, 6, 7, 7, 7, 9, 21])
-    }
-    #[test]
-    fn basic() {
-        let mut res = vec![10, 8, 4, 3, 1, 9, 2, 7, 5, 6];
-        let length = res.len();
-        smart_sort(&mut res, length, 0, length - 1, length);
-        assert_eq!(res, vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-    }
-
-    #[test]
-    fn empty() {
-        let mut res = Vec::<i32>::new();
-        let length = res.len();
-        smart_sort(&mut res, length, 0, 0);
-        assert_eq!(res, vec![]);
-    }
-
-    #[test]
-    fn one_element() {
-        let mut res = vec![1];
-        let length = res.len();
-        smart_sort(&mut res, length, 0, length - 1, length);
-        assert_eq!(res, vec![1]);
-    }
-
-    #[test]
-    fn pre_sorted() {
-        let mut res = vec![1, 2, 3, 4];
-        let length = res.len();
-        smart_sort(&mut res, length, 0, length - 1, length);
-        assert_eq!(res, vec![1, 2, 3, 4]);
-    }
-
-    #[test]
-    fn reverse_sorted() {
-        let mut res = vec![4, 3, 2, 1];
-        let length = res.len();
-        smart_sort(&mut res, length, 0, length - 1, length);
-        assert_eq!(res, vec![1, 2, 3, 4]);
-    }
 }

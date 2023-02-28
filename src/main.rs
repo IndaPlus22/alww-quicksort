@@ -7,24 +7,15 @@ use std::{
 
 // mod generate_testfile;
 fn main() {
-    let start = Instant::now();
     // make_testfile();
     let mut values = get_input();
     let max_depth = (values.len() as f64).log2().floor() as usize * 2 as usize;
-    eprintln!("Max: {}", max_depth);
     let len = values.len();
     smart_sort(&mut values, max_depth, 0, len - 1, len);
-    println!(
-        "{}",
-        values
-            .iter()
-            .map(|i| i.to_string())
-            .collect::<Vec<String>>()
-            .join(" ")
-    );
-    let duration = start.elapsed();
-
-    eprintln!("Time elapsed in expensive_function() is: {:?}", duration);
+    for item in &values {
+        print!("{} ", item)
+    }
+    print!("\n");
 }
 
 fn smart_sort(values: &mut [i32], max_depth: usize, low: usize, high: usize, length: usize) {

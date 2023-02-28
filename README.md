@@ -1,4 +1,4 @@
 # alww-quicksort
 
 qs
-![proof](/proof.png)
+![proof](/proof1.png)

@@ -162,14 +162,14 @@ mod tests {
     fn easy_nr() {
         let mut res = vec![3, 6, 21, 3, 7, 1, 4, 7, 9, 2, 3, 7, 0];
         let length = res.len();
-        smart_sort(&mut res, length, 0, length - 1);
+        smart_sort(&mut res, length, 0, length - 1, length);
         assert_eq!(res, [0, 1, 2, 3, 3, 3, 4, 6, 7, 7, 7, 9, 21])
     }
     #[test]
     fn basic() {
         let mut res = vec![10, 8, 4, 3, 1, 9, 2, 7, 5, 6];
         let length = res.len();
-        smart_sort(&mut res, length, 0, length - 1);
+        smart_sort(&mut res, length, 0, length - 1, length);
         assert_eq!(res, vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
     }
 
@@ -185,7 +185,7 @@ mod tests {
     fn one_element() {
         let mut res = vec![1];
         let length = res.len();
-        smart_sort(&mut res, length, 0, length - 1);
+        smart_sort(&mut res, length, 0, length - 1, length);
         assert_eq!(res, vec![1]);
     }
 
@@ -193,7 +193,7 @@ mod tests {
     fn pre_sorted() {
         let mut res = vec![1, 2, 3, 4];
         let length = res.len();
-        smart_sort(&mut res, length, 0, length - 1);
+        smart_sort(&mut res, length, 0, length - 1, length);
         assert_eq!(res, vec![1, 2, 3, 4]);
     }
 
@@ -201,7 +201,7 @@ mod tests {
     fn reverse_sorted() {
         let mut res = vec![4, 3, 2, 1];
         let length = res.len();
-        smart_sort(&mut res, length, 0, length - 1);
+        smart_sort(&mut res, length, 0, length - 1, length);
         assert_eq!(res, vec![1, 2, 3, 4]);
     }
 }

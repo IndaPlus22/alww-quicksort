@@ -1,2 +1,4 @@
 # alww-quicksort
-qs
+
+slow qs
+![proof](/proof.png)
